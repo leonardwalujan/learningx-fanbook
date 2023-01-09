@@ -78,18 +78,26 @@
         function save_comment() {
             let name = $('#name').val();
             let comment = $('#comment').val();
-            $.ajax({
-                type: 'POST',
-                url: '/homework',
-                data: {
-                    'name_give': name,
-                    'comment_give': comment
-                },
-                success: function (response) {
-                    alert(response['msg'])
-                    window.location.reload()
-                }
-            })
+            if (!name && !comment) {
+                alert("Please fill out your name and comment!")
+            } else if (!name) {
+                alert("Please fill out your name!")
+            } else if (!comment) {
+                alert("Please fill out your comment!")
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/homework',
+                    data: {
+                        'name_give': name,
+                        'comment_give': comment
+                    },
+                    success: function (response) {
+                        alert(response['msg'])
+                        window.location.reload()
+                    }
+                })
+            }
         }
         function show_comment() {
             $('#comment-list').empty();
